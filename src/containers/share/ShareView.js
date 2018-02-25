@@ -147,6 +147,7 @@ class ShareView extends Component {
   componentDidMount = () => {
     if (this.props.allRecords !== null) {
       this.setState({
+        allRecords: this.props.allRecords || [],
         collectionsDS: collectionsDS.cloneWithRows(this.props.allRecords || [{}]),
       });
     }
