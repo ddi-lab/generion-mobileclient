@@ -1,0 +1,49 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'StarterKit' do
+  # Uncomment this line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for example
+    pod 'React', :path => '../node_modules/react-native', :subspecs => [
+        'Core',
+        'RCTImage',
+        'RCTAnimation',
+        'RCTNetwork',
+        'RCTText',
+        'RCTWebSocket'
+    ]
+
+    pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+
+
+end
+
+pre_install do |installer|
+  # workaround for https://github.com/CocoaPods/CocoaPods/issues/3289
+  def installer.verify_no_static_framework_transitive_dependencies; end
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      if target.name == 'react-native-google-maps'
+        target.build_configurations.each do |config|
+          config.build_settings['CLANG_ENABLE_MODULES'] = 'No'
+        end
+      end
+      
+      if target.name == "React"
+        target.remove_from_project
+      end
+    end
+
+    installer.aggregate_targets.each do |target|
+      copy_pods_resources_path = "Pods/Target Support Files/#{target.name}/#{target.name}-resources.sh"
+      string_to_replace = '--compile "${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"'
+      assets_compile_with_app_icon_arguments = '--compile "${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}" --app-icon "${ASSETCATALOG_COMPILER_APPICON_NAME}" --output-partial-info-plist "${BUILD_DIR}/assetcatalog_generated_info.plist"'
+      text = File.read(copy_pods_resources_path)
+      new_contents = text.gsub(string_to_replace, assets_compile_with_app_icon_arguments)
+      File.open(copy_pods_resources_path, "w") {|file| file.puts new_contents }
+    end
+  end
