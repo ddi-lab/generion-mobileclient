@@ -19,6 +19,7 @@ import {
   Text,
   View,
   WebView,
+  RefreshControl,
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { CachedImage } from 'react-native-img-cache';
@@ -41,6 +42,7 @@ import CustomToolbar from '../../components/ui/Toolbar';
 const mapStateToProps = state => ({
   allOrders: state.orders.allOrders,
   allOrdersKey: state.orders.allOrdersKey,
+  allOrdersInProgress: state.orders.allOrdersInProgress,
 });
 
 // Any actions to map to the component?
@@ -147,12 +149,14 @@ class MainView extends Component {
     }
   }
 
-  createRecord = () => {
-    Actions.createRecord();
+  onRefresh = () => {
+    if (!this.props.allOrdersInProgress) {
+      this.props.getAllOrders();
+    }
   }
 
   onSelectItem = () => {
-    alert('Buy data comming soon');
+    alert('The purchase of data has not implemented yet in the mobile application');
   }
 
   renderHeader = () => (
@@ -166,18 +170,18 @@ class MainView extends Component {
   render() {
     return (
       <SafeAreaView style={[AppStyles.appContainer, AppStyles.flex1]} renderToHardwareTextureAndroid >
-        <ScrollView
+        <OrdersListView
           style={{ flex: 1, backgroundColor: 'white' }}
-          removeClippedSubviews={false}
-        >
-          <OrdersListView
-            onItemClick={this.onSelectItem}
-            collectionsDS={this.state.collectionsDS}
-            renderHeader={this.renderHeader}
-          />
-        </ScrollView>
-
-
+          onItemClick={this.onSelectItem}
+          collectionsDS={this.state.collectionsDS}
+          renderHeader={this.renderHeader}
+          refreshControl={
+            <RefreshControl
+              refreshing={false}
+              onRefresh={this.onRefresh}
+            />
+          }
+        />
       </SafeAreaView>
     );
   }
