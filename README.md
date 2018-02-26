@@ -16,7 +16,7 @@ The app includes following functionality:
 - Creation of public access keys for data sharing 
 - Ability to sell personal data for tokens.
 
-[Demo](https://youtu.be/srqRs5rSh3k)
+[Youtube Demo](https://youtu.be/srqRs5rSh3k)
 
 
 
