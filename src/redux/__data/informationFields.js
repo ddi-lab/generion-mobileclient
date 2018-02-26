@@ -18,8 +18,8 @@ export default {
           variants: [],
         },
         {
-          id: 'surname',
-          description: 'Surname',
+          id: ' patronymic',
+          description: 'Patronymic',
           type: 'text',
           variants: [],
         },
