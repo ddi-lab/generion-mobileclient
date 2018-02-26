@@ -6,7 +6,7 @@
 
 <h1 align="center">Generion mobile client</h1>
 
-### 1.	Demo?
+### 1.	Demo
 
 ![Demo](https://raw.githubusercontent.com/ddi-lab/generion-mobileclient/master/ezgif-5-e0a4708c5a.gif)
 
