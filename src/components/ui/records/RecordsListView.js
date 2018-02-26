@@ -107,15 +107,15 @@ class RecordsListView extends Component {
 
   render() {
     return (
-      <View>
-        <ListView
-          removeClippedSubviews={false}
-          dataSource={this.props.collectionsDS}
-          renderRow={rowData => this.rowList(rowData)}
-          renderHeader={this.props.renderHeader}
-          vertical
-        />
-      </View>
+      <ListView
+        style={this.props.style}
+        refreshControl={this.props.refreshControl}
+        removeClippedSubviews={false}
+        dataSource={this.props.collectionsDS}
+        renderRow={rowData => this.rowList(rowData)}
+        renderHeader={this.props.renderHeader}
+        vertical
+      />
     );
   }
 }

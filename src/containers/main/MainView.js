@@ -19,6 +19,7 @@ import {
     Text,
     View,
     WebView,
+    RefreshControl,
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { CachedImage } from 'react-native-img-cache';
@@ -41,6 +42,7 @@ import CustomToolbar from '../../components/ui/Toolbar';
 const mapStateToProps = state => ({
   allRecords: state.records.allRecords,
   allRecordsKey: state.records.allRecordsKey,
+  allRecordsInProgress: state.records.allRecordsInProgress,
   account: state.auth.account,
   rsaKey: state.auth.rsaKey,
 });
@@ -158,6 +160,12 @@ class MainView extends Component {
     }
   }
 
+  onRefresh = () => {
+    if (this.props.account != null && !this.props.allRecordsInProgress) {
+      this.props.getAllRecords(this.props.account.address, this.props.rsaKey);
+    }
+  }
+
   createRecord = () => {
     Actions.createRecord();
   }
@@ -190,15 +198,17 @@ class MainView extends Component {
   render() {
     return (
       <SafeAreaView style={[AppStyles.appContainer, AppStyles.flex1]} renderToHardwareTextureAndroid >
-        <ScrollView
+        <RecordsListView
           style={{ flex: 1, backgroundColor: 'white' }}
-          removeClippedSubviews={false}
-        >
-          <RecordsListView
-            collectionsDS={this.state.collectionsDS}
-            renderHeader={this.renderHeader}
-          />
-        </ScrollView>
+          collectionsDS={this.state.collectionsDS}
+          renderHeader={this.renderHeader}
+          refreshControl={
+            <RefreshControl
+              refreshing={false}
+              onRefresh={this.onRefresh}
+            />
+          }
+        />
       </SafeAreaView>
     );
   }
