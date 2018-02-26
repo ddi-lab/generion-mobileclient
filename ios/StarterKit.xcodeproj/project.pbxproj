@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00955DF79D104F6C829B2617 /* libRCTBEEPickerManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80D8642D02964120AAB045BD /* libRCTBEEPickerManager.a */; };
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
@@ -37,7 +38,6 @@
 		377865A391264332817AE3C3 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 037F13963D23404DBB23BC3F /* Ionicons.ttf */; };
 		3DC74243BA544CB2B70EC01B /* Proxima Nova Condensed Bold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B693A5E10EC94612830475DB /* Proxima Nova Condensed Bold Italic.otf */; };
 		426C4CA9EE3F4C1F82EDEA2B /* Proxima Nova Extra Condensed Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 67D2A199687B4C8A9DE3BF03 /* Proxima Nova Extra Condensed Semibold.otf */; };
-		4439B3291F756BB900172098 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4439B3281F756BB900172098 /* GoogleService-Info.plist */; };
 		463E4FD97C649834F3CC8D2F /* libPods-StarterKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E22171163ADBD971BB9AF89 /* libPods-StarterKit.a */; };
 		4BFD7ADBAF8B42BC882B06D7 /* Proxima Nova Extra Condensed Regular Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4E42E22F1FB8496E97976B76 /* Proxima Nova Extra Condensed Regular Italic.otf */; };
 		50BAB68A1EB84DA69372E99D /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA2A2B45BE844319B549C2DD /* Octicons.ttf */; };
@@ -434,7 +434,6 @@
 		3679EAB0C66849259220687A /* Proxima Nova Condensed Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova Condensed Bold.otf"; path = "../assets/fonts/Proxima Nova Condensed Bold.otf"; sourceTree = "<group>"; };
 		38E1B48013E04C56AB26705D /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		3AA75B5AC1654513A66411AF /* Proxima Nova Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova Light.otf"; path = "../assets/fonts/Proxima Nova Light.otf"; sourceTree = "<group>"; };
-		4439B3281F756BB900172098 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		443D93EC9C6844E6BE3DAFFF /* Proxima Nova Extra Condensed Light Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova Extra Condensed Light Italic.otf"; path = "../assets/fonts/Proxima Nova Extra Condensed Light Italic.otf"; sourceTree = "<group>"; };
 		44BEFDD51DF44721862AAD76 /* Proxima Nova Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova Bold.otf"; path = "../assets/fonts/Proxima Nova Bold.otf"; sourceTree = "<group>"; };
 		48DD2691FB1C4980BA1DE7EA /* Proxima Nova Extra Condensed Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova Extra Condensed Thin.otf"; path = "../assets/fonts/Proxima Nova Extra Condensed Thin.otf"; sourceTree = "<group>"; };
@@ -506,9 +505,6 @@
 		E952E65D1F45921A00B9D819 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		E962F8451F49D42A002B9298 /* StarterKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = StarterKit.entitlements; path = StarterKit/StarterKit.entitlements; sourceTree = "<group>"; };
 		E9B75A231F559BD500C140ED /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		E9B75A241F559BD500C140ED /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
-		E9B75A251F559BD500C140ED /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
-		E9B75A261F559BD500C140ED /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		ECDE6F1FEC3D4E42B38084FF /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		EF857F8EFB3B440C99D144B4 /* Proxima Nova Extra Condensed Black Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova Extra Condensed Black Italic.otf"; path = "../assets/fonts/Proxima Nova Extra Condensed Black Italic.otf"; sourceTree = "<group>"; };
 		F55FFEE641AD4142968B0358 /* Proxima Nova Condensed Thin Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova Condensed Thin Italic.otf"; path = "../assets/fonts/Proxima Nova Condensed Thin Italic.otf"; sourceTree = "<group>"; };
@@ -630,7 +626,6 @@
 			isa = PBXGroup;
 			children = (
 				B58E3D371FBD07960021A733 /* Images.xcassets */,
-				4439B3281F756BB900172098 /* GoogleService-Info.plist */,
 				E962F8451F49D42A002B9298 /* StarterKit.entitlements */,
 				C97D70901E2375C300C3C793 /* LaunchScreen.storyboard */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -908,9 +903,6 @@
 			isa = PBXGroup;
 			children = (
 				E9B75A231F559BD500C140ED /* Bolts.framework */,
-				E9B75A241F559BD500C140ED /* FBSDKCoreKit.framework */,
-				E9B75A251F559BD500C140ED /* FBSDKLoginKit.framework */,
-				E9B75A261F559BD500C140ED /* FBSDKShareKit.framework */,
 				C97D70C41E2377B200C3C793 /* libsqlite3.0.tbd */,
 				C97D70C21E2377A300C3C793 /* libz.tbd */,
 				C97D70C01E23779800C3C793 /* SystemConfiguration.framework */,
@@ -1520,7 +1512,6 @@
 				D8CB9D06399040DF97562863 /* Proxima Nova Regular.otf in Resources */,
 				7EEB17C3F252462083E4FCEE /* Proxima Nova Semibold Italic.otf in Resources */,
 				F6E37C4F28644950B870E450 /* Proxima Nova Semibold.otf in Resources */,
-				4439B3291F756BB900172098 /* GoogleService-Info.plist in Resources */,
 				0D982C5FDC4C4423BF605E34 /* Proxima Nova Thin Italic.otf in Resources */,
 				233B48A6C8BA4B218CACC9CC /* Proxima Nova Thin.otf in Resources */,
 				8FDF3F6297A64C6D960C27ED /* Feather.ttf in Resources */,
@@ -1801,7 +1792,7 @@
 					"-lc++",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "io.the-rooms.app";
+				PRODUCT_BUNDLE_IDENTIFIER = io.generion.app;
 				PRODUCT_NAME = StarterKit;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1858,7 +1849,7 @@
 					"$(inherited)",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "io.the-rooms.app";
+				PRODUCT_BUNDLE_IDENTIFIER = io.generion.app;
 				PRODUCT_NAME = StarterKit;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

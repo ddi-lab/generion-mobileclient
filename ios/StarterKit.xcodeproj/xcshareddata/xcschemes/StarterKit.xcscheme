@@ -133,7 +133,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
-      customArchiveName = "Rooms"
+      customArchiveName = "Generion"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
