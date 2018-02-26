@@ -6,6 +6,15 @@
 
 <h1 align="center">Generion mobile client</h1>
 
+### 1.	Demo?
+
+![Demo](https://raw.githubusercontent.com/ddi-lab/generion-mobileclient/master/ezgif-5-e0a4708c5a.gif)
+
+
+### 2.	Run
+
+Generion is blockchain-based, decentralized infrastructure for safe and anonymous storing, using and sharing personal data. The current MVP is aimed to healthcare domain. However, the architecture can be used in any sphere that accumulates and operates user’s personal information.
+
 Install node (https://nodejs.org/en/download/)
 Install cocoapods (https://cocoapods.org/)
 
