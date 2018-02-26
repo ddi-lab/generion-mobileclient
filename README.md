@@ -8,7 +8,7 @@
 
 ### 1.	Demo
 
-![Demo](https://youtu.be/srqRs5rSh3k)
+[Demo](https://youtu.be/srqRs5rSh3k)
 
 
 ### 2.	Run
