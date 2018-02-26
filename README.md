@@ -6,9 +6,18 @@
 
 <h1 align="center">Generion mobile client</h1>
 
-### 1.	Demo
+### 1.	Patient’s mobile app
+
+The app includes following functionality:
+- User registration and authorisation
+- Key pair creation
+- Creation and uploading public keys using QR-code scanner. 
+- Creation and uploading electronic medical records, choosing the access key. 
+- Creation of public access keys for data sharing 
+- Ability to sell personal data for tokens.
 
 [Demo](https://youtu.be/srqRs5rSh3k)
+
 
 
 ### 2.	Run
