@@ -16,7 +16,7 @@ The app includes following functionality:
 - Creation of public access keys for data sharing 
 - Ability to sell personal data for tokens.
 
-[Youtube Demo](https://youtu.be/srqRs5rSh3k)
+[Youtube Demo](http://ddi-lab.com/coz-2018-client-demo.html)
 
 
 
