@@ -6,6 +6,24 @@ export default {
       description: 'Personal information',
       types: [
         {
+          id: 'firstname',
+          description: 'First name',
+          type: 'text',
+          variants: [],
+        },
+        {
+          id: 'surname',
+          description: 'Surname',
+          type: 'text',
+          variants: [],
+        },
+        {
+          id: 'surname',
+          description: 'Surname',
+          type: 'text',
+          variants: [],
+        },
+        {
           id: 'sex',
           description: 'Sex',
           type: 'enum',
@@ -19,12 +37,6 @@ export default {
             value: 'trans',
             description: 'Trans',
           }],
-        },
-        {
-          id: 'age',
-          description: 'Age',
-          type: 'enum',
-          variants: [],
         },
         {
           id: 'id_number',
