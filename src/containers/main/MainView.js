@@ -126,10 +126,10 @@ class MainView extends Component {
       collectionsDS: collectionsDS.cloneWithRows([]),
       headerData: [{
         name: 'Create',
-        imageUrl: 'https://pp.userapi.com/c824701/v824701138/9017c/Xf-1DZLKmQk.jpg',
+        imageUrl: 'https://pp.userapi.com/c831309/v831309279/895fe/H5zvEQjE8ns.jpg',
       }, {
         name: 'Share',
-        imageUrl: 'https://pp.userapi.com/c824701/v824701138/9017c/Xf-1DZLKmQk.jpg',
+        imageUrl: 'https://pp.userapi.com/c831309/v831309279/89613/vsowwGmEwdU.jpg',
       }],
     };
   }
@@ -181,7 +181,7 @@ class MainView extends Component {
 
       <View style={styles.favoritesView}>
         <View style={styles.rowHead}>
-          <Text style={styles.rowHeadTitle}>Favorite</Text>
+          <Text style={styles.rowHeadTitle}>Data actions</Text>
         </View>
 
         <FavoritesView items={this.state.headerData} />

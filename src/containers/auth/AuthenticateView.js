@@ -279,7 +279,7 @@ class Authenticate extends Component {
         return (
           <View style={styles.tabContainer}>
 
-            <Text style={styles.title}>WELCOME TO ME</Text>
+            <Text style={styles.title}>WELCOME TO GENERION</Text>
 
 
             <Text style={styles.bigTitle}>Authorize</Text>

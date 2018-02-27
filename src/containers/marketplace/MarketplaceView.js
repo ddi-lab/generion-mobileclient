@@ -156,7 +156,7 @@ class MainView extends Component {
   }
 
   onSelectItem = () => {
-    alert('The purchase of data has not implemented yet in the mobile application');
+    alert('Data purchase is not implemented in the mobile app yet');
   }
 
   renderHeader = () => (
