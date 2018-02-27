@@ -10,6 +10,8 @@ const mapStateToProps = state => ({
     loading: !!(
         state.records.createInProgress ||
         state.records.allRecordsInProgress ||
+        state.records.shareInProgress ||
+        state.records.patientsRecordsInProgress ||
         state.orders.createInProgress ||
         state.orders.allOrdersInProgress
     ),

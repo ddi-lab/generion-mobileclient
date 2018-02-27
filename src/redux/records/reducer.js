@@ -8,6 +8,14 @@ const initialState = {
   createInProgress: false,
   createSuccess: false,
   createError: false,
+
+  shareInPropgress: false,
+  shareSuccess: false,
+  shareError: false,
+
+  patientsRecordsInProgress: false,
+  patientsRecords: [],
+  patientsRecordsKey: null,
 };
 
 const handlers = {};
@@ -47,6 +55,43 @@ handlers[actionTypes.CREATE_RECORD_FAILURE] = (state, action) => ({
   createSuccess: false,
   createError: true,
 });
+
+// Get patients records
+handlers[actionTypes.GET_PATIENTS_RECORDS_REQUEST] = (state, action) => ({
+  ...state,
+  patientsRecordsInProgress: true,
+});
+handlers[actionTypes.GET_PATIENTS_RECORDS_SUCCESS] = (state, action) => ({
+  ...state,
+  patientsRecordsInProgress: false,
+  patientsRecords: action.payload,
+  patientsRecordsKey: Math.random(),
+});
+handlers[actionTypes.GET_PATIENTS_RECORDS_FAILURE] = (state, action) => ({
+  ...state,
+  patientsRecordsInProgress: false,
+});
+
+// Share records
+handlers[actionTypes.CREATE_RECORD_REQUEST] = (state, action) => ({
+  ...state,
+  shareInProgress: true,
+  shareSuccess: false,
+  shareError: false,
+});
+handlers[actionTypes.CREATE_RECORD_SUCCESS] = (state, action) => ({
+  ...state,
+  shareInProgress: false,
+  shareSuccess: true,
+  shareError: false,
+});
+handlers[actionTypes.CREATE_RECORD_FAILURE] = (state, action) => ({
+  ...state,
+  shareInProgress: false,
+  shareSuccess: false,
+  shareError: true,
+});
+
 
 export default (state = initialState, action) => {
   if (action.type in handlers) {

@@ -200,7 +200,7 @@ class Authenticate extends Component {
       rsaPrivateKey: rsaKey.getPrivateString(),
     };
 
-    await AsyncStorage.setItem('@Store:keysData', JSON.stringify(storageData));
+    await AsyncStorage.setItem('@Store:keysData4', JSON.stringify(storageData));
     this.props.saveWallet({
       wallet: this.wallet,
       rsaKey,
@@ -215,7 +215,7 @@ class Authenticate extends Component {
       restoringAuth: true,
     });
 
-    const keyData = await AsyncStorage.getItem('@Store:keysData');
+    const keyData = await AsyncStorage.getItem('@Store:keysData4');
     
     if(keyData !== null){
       const data = JSON.parse(keyData);

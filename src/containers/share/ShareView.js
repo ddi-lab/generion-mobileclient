@@ -30,7 +30,7 @@ import { Actions } from 'react-native-router-flux';
 // Consts and Libs
 import { AppStyles, AppColors, AppSizes, AppFonts } from '@theme/';
 
-import { getAllRecords } from '@redux/records/actions';
+import { getAllRecords, shareRecords } from '@redux/records/actions';
 import { createOrder } from '@redux/orders/actions';
 import { TabViewAnimated, TabBar } from 'react-native-tab-view';
 import { CachedImage } from 'react-native-img-cache';
@@ -53,7 +53,7 @@ const mapStateToProps = state => ({
 // Any actions to map to the component?
 const mapDispatchToProps = {
   getAllRecords,
-  createOrder,
+  shareRecords,
 };
 const styles = StyleSheet.create({
   container: {
@@ -166,9 +166,9 @@ class ShareView extends Component {
       });
     }
 
-    if (this.props.createInProgress && !nextProps.createInProgress) {
+    if (this.props.shareInProgress && !nextProps.shareInProgress) {
       if (nextProps.createSuccess) {
-        Actions.marketplace();
+        Actions.main();
       } else {
         alert('Error');
       }
@@ -235,9 +235,15 @@ class ShareView extends Component {
     this.props.createOrder(this.props.account.address, ids, price);
   }
 
-  renderScene = ({ route }) => {
-    const isSceneValidated = this.validateStep(route.key);
+  shareAccess = () => {
+    const publicKey = this.state.pub_key;
+    const allItems = this.state.allRecords || [];
+    const items = allItems.filter(x => x.isChecked);
 
+    this.props.shareRecords(this.props.account.address, publicKey, items);
+  }
+
+  renderScene = ({ route }) => {
     switch (route.key) {
       case '0' :
         return (
@@ -266,38 +272,38 @@ class ShareView extends Component {
           <View style={styles.tabContainer}>
 
 
-            {this.state.price != null && this.state.price.length > 0 && this.state.price > 0 &&
+            {this.state.pub_key != null && this.state.pub_key.length > 0 &&
 
               <View style={styles.floatButton} forceInset={{ bottom: 'always' }}>
 
-                <Button title={'Next'} onPress={() => this.createOrder()} upperCase large textOnly />
+                <Button title={'Next'} onPress={() => this.shareAccess()} upperCase large textOnly />
 
               </View>
               }
 
             <View>
-              <Toolbar title={'Another info'} style={{ flex: 1 }} />
+              <Toolbar title={'Who\'ll get access'} style={{ flex: 1 }} />
 
 
-              <View style={{ paddingTop: 20 }}>
-{/* 
+              <View style={{ paddingTop: 20, paddingLeft: 20, paddingRight: 20 }}>
+
                 <TextInput
                   style={styles.textInputStyle}
-                  placeholder={'Address'}
+                  placeholder={'Public key'}
                   onChangeText={value => this.setState({
-                    address: value,
+                    pub_key: value,
                   })}
-                  value={this.state.address || ''}
-                /> */}
+                  value={this.state.pub_key || ''}
+                />
 
-                <TextInput
+                {/* <TextInput
                   style={styles.textInputStyle}
                   placeholder={'Price'}
                   onChangeText={value => this.setState({
                     price: value,
                   })}
                   value={this.state.price || ''}
-                />
+                /> */}
 
 
               </View>

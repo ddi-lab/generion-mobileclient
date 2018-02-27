@@ -29,6 +29,8 @@ import { Dimensions, Platform } from 'react-native';
 import MainView from '@containers/main/MainView';
 import CreateView from '@containers/create/CreateView';
 import MarketplaceView from '@containers/marketplace/MarketplaceView';
+import ConnectView from '@containers/connect/ConnectView';
+import PatientsView from '@containers/patients/PatientsView';
 
 
 const navbarPropsTabs = {
@@ -137,6 +139,17 @@ const scenes = (
       analyticsDesc={'Placeholder: qr'}
     />
 
+    <Scene
+      key={'connect'}
+      {...navbarPropsTabs}
+      buttonTitle={'Connect'}
+      title={' '}
+      component={ConnectView}
+      icon={TabText}
+      getTitle={props => (props.title : 'connect')}
+      analyticsDesc={'Placeholder: connect'}
+    />
+
     {/* <Scene */}
     {/* key={'history'} */}
     {/* {...navbarPropsTabs} */}
@@ -160,6 +173,17 @@ const scenes = (
     />
 
     <Scene
+      key={'patients'}
+      {...navbarPropsTabs}
+      buttonTitle={'Patients'}
+      title={' '}
+      component={PatientsView}
+      icon={TabText}
+      getTitle={props => (props.title : 'patients')}
+      analyticsDesc={'Placeholder: patients'}
+    />
+
+    {/* <Scene
       key={'marketplace'}
       {...navbarPropsTabs}
       buttonTitle={'Marketplace'}
@@ -168,7 +192,7 @@ const scenes = (
       icon={TabText}
       getTitle={props => (props.title : 'marketplace')}
       analyticsDesc={'Placeholder: marketplace'}
-    />
+    /> */}
 
 
   </Tabs>
