@@ -1,39 +1,48 @@
 import cryptoJS from 'crypto-js';
 import RSAKey from 'react-native-rsa';
-// import cryptico from 'cryptico-js';
-// import crypto from 'crypto';
 import Neon from '@cityofzion/neon-js';
 import { generateSecureRandom } from 'react-native-securerandom';
 
-import { generateUUID } from '@lib/util';
 
-// export class RSAKey {
-//   bits = 1024;
-//   name = null;
-//   passPhrase = null;
-//   rsa = null;
-//   publicKey = null;
-//   publicId = null;
+const base64chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+const btoa = (input = '')  => {
+  let str = input;
+  let output = '';
 
-//   constructor(name) {
-//     this.name = name;
-//   }
+  for (let block = 0, charCode, i = 0, map = base64chars;
+  str.charAt(i | 0) || (map = '=', i % 1);
+  output += map.charAt(63 & block >> 8 - i % 1 * 8)) {
 
-//   fromPass = (pass) => {
-//     this.passPhrase = pass;
+    charCode = str.charCodeAt(i += 3/4);
 
-//     this.rsa = cryptico.generateRSAKey(this.passPhrase, this.bits);
-//     this.publicKey = cryptico.publicKeyString(this.rsa);
-//     this.publicId = cryptico.publicKeyID(this.publicKey);
-//   }
+    if (charCode > 0xFF) {
+      throw new Error("'btoa' failed: The string to be encoded contains characters outside of the Latin1 range.");
+    }
 
-//   random = () => {
-//     if (this.rsa !== null) {
-//       return;
-//     }
-//     this.fromPass(generateUUID());
-//   }
-// }
+    block = block << 8 | charCode;
+  }
+
+  return output;
+};
+
+const atob = (input = '') => {
+  let str = input.replace(/=+$/, '');
+  let output = '';
+
+  if (str.length % 4 == 1) {
+    throw new Error("'atob' failed: The string to be decoded is not correctly encoded.");
+  }
+  for (let bc = 0, bs = 0, buffer, i = 0;
+    buffer = str.charAt(i++);
+
+    ~buffer && (bs = bc % 4 ? bs * 64 + buffer : buffer,
+      bc++ % 4) ? output += String.fromCharCode(255 & bs >> (-2 * bc & 6)) : 0
+  ) {
+    buffer = base64chars.indexOf(buffer);
+  }
+
+  return output;
+};
 
 export const randomKey = async (q = 128) => {
   const randomBytes = await generateSecureRandom(q);
@@ -67,16 +76,25 @@ export const createRSAKeyFromPrivateKey = async (privateKey) => {
 export const getRSAPublicKeyFromPass = (passphrase) => {
   const key = createRSAKey(passphrase);
 
-  return Neon.u.str2hexstring(key.RSAGetPublicString());
+  return Neon.u.str2hexstring(key.getPublicString());
 };
 
 export const encryptWithRSA = (rsaKey, message) => rsaKey.encrypt(message);
+
+export const encryptWithPublicKey = (publicKey, message) => {
+  const key = atob(publicKey);
+  const rsaKey = new RSAKey();
+  rsaKey.setPublicString(key);
+
+  return encryptWithRSA(rsaKey, message);
+};
+
+export const getPublicKeyFromRsa = (rsaKey) => btoa(rsaKey.getPublicString());
 
 export const decryptWithRSA = (rsaKey, message) => rsaKey.decrypt(message);
 
 export const encryptWithPass = (passphrase, message) => {
   const rsaKey = createRSAKey(passphrase);
-  
   return encryptWithRSA(rsaKey, message);
 };
 
@@ -84,38 +102,3 @@ export const decryptWithPass = (passphrase, message) => {
   const rsaKey = createRSAKey(passphrase);
   return decryptWithRSA(rsaKey, message);
 };
-
-// export const createRSAKey = () => {
-//   const key = new RSAKey();
-//   const bits = 1024;
-//   const exponent = '10001';
-//   key.generate(bits, exponent);
-
-//   return key;
-// };
-
-// export const restoreRSAKey = (passphrase) => {
-//   const key = new RSAKey();
-//   key.fromPass(passphrase);
-
-//   return key;
-// };
-
-// export const dectrypWithKey = (key, message) => cryptico.decrypt(message, key.rsa).plaintext;
-
-// export const dectrypWithPass = (passphrase, message) => {
-//   const key = restoreRSAKey(passphrase);
-
-//   return dectrypWithKey(key, message);
-// };
-
-// export const encryptWithPublicKey = (publicKey, message) => cryptico.encrypt(message, publicKey);
-// export const encryptWithKey = (key, message) => {
-//   const publicKey = cryptico.publicKeyString(key.rsa);
-//   cryptico.encrypt(message, publicKey);
-// };
-// export const encryptWithPass = (passphrase, message) => {
-//   const key = restoreRSAKey(passphrase);
-
-//   return encryptWithKey(key, message);
-// };
