@@ -20,64 +20,88 @@ export const getAllRecords = (address, rsaKey) => async (dispatch) => {
       });
     });
   
-  const accessRequests = [];
-  accessIds.map(id => {
-    accessRequests.push(
-      clients.accessStorage.client.request({
-        url: `/records/${id}`,
-        method: 'GET',
-      }).then(response => {
-        const result = response.data.result;
-        const data = {
-          accessId: id,
-          userAddress: result[0],
-          publicKey: result[1],
-          data: decryptWithRSA(rsaKey, result[2]),
-        };
+  if (accessIds.length === 0) {
+    dispatch({
+      type: actionTypes.GET_ALL_RECORDS_SUCCESS,
+      payload: [],
+    });
+    return;
+  }
 
-        return data;
-      }),
-    );
-  });
-  
-  const accesses = await Promise.all(accessRequests);
 
-  const recordsRequests = [];
-  accesses.map(access => {
-    let recordData = null;
-
-    try {
-      var data = JSON.parse(access.data);
-      if(data != null && Array.isArray(data) && data.length === 2) {
-        recordData = {
-          accessId: access.accessId,
-          address: data[0],
-          secret: data[1],
-        };
+  const accesses = await clients.accessStorage.client.request({
+    url: `/records/${accessIds.join(':')}`,
+    method: 'GET',
+  }).then(response => {
+    const result = response.data.result;
+    const decryptedItems = [];
+    result.map((item, index) => {
+      if (item.length !== 3) {
+        return;
       }
-    } catch (error) {
+      const dataRaw = decryptWithRSA(rsaKey, item[2]);
+      let data = null;
+      try {
+        data = JSON.parse(dataRaw);
+      } catch (error) {}
+      if (data === null || !Array.isArray(data) || data.length !== 2) {
+        return;
+      }
+      decryptedItems.push({
+        accessId: accessIds[index],
+        userAddress: result[0],
+        publicKey: result[1],
+        data,
+      });
+    });
 
-    }
-
-    if(recordData === null) {
-      return;
-    }
-    const dataStoreConfig = {
-      url: `/document/${recordData.address}`
-    };
-    recordsRequests.push(
-      clients.dataStorage.client.request(dataStoreConfig)
-        .then(({ data }) => {
-          console.log([recordData.secret, data.content]);
-          return {
-            ...recordData,
-            content: decryptAES(recordData.secret, data.content),
-          };
-        }),
-    );
+    return decryptedItems;
   });
-  
-  const records = await Promise.all(recordsRequests);
+
+  if (accesses.length === 0) {
+    dispatch({
+      type: actionTypes.GET_ALL_RECORDS_SUCCESS,
+      payload: [],
+    });
+    return;
+  }
+
+
+  const records = await clients.dataStorage.client.request({
+    url: '/documents',
+    method: 'POST',
+    data: accesses.map(access => access.data[0]),
+  }).then(response => {
+    const result = response.data;
+    const decryptedItems = [];
+    result.map((item, index) => {
+      const access = accesses.filter(x => x.data[0] === item.address)[0];
+      if (access == null) {
+        return;
+      }
+
+      const recordData = {
+        accessId: access.accessId,
+        address: access.data[0],
+        secret: access.data[1],
+        encryptedContent: item.content,
+        content: null,
+      };
+
+      try {
+        recordData.content = decryptAES(recordData.secret, recordData.encryptedContent);
+      } catch (error) {}
+
+      if (recordData.content == null) {
+        return;
+      }
+      
+      decryptedItems.push(recordData);
+    });
+
+    return decryptedItems;
+  });
+
   dispatch({
     type: actionTypes.GET_ALL_RECORDS_SUCCESS,
     payload: records,
@@ -117,13 +141,16 @@ export const createRecord = (address, rsaKey, data) => async (dispatch) => {
   await clients.accessStorage.client.request({
     url: `/users/${address}/records/`,
     method: 'POST',
-    data: accessDataRaw,
+    data: {
+      records: [accessDataRaw],
+    },
   }).then(() => {
     dispatch({
       type: actionTypes.CREATE_RECORD_SUCCESS,
     });
   })
-  .catch(() => {
+  .catch((error) => {
+    console.log(error);
     dispatch({
       type: actionTypes.CREATE_RECORD_FAILURE,
     });
